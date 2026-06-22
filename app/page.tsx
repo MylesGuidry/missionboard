@@ -1,22 +1,18 @@
-const launch = {
-  mission: "Artemis II",
-  agency: "NASA",
-  rocket: "Space Launch System",
-  location: "Kennedy Space Center",
-  status: "GO",
-  days: 12,
-  hours: 4,
-  minutes: 33,
-};
+import { getUpcomingLaunches } from "@/lib/launches";
 
-const upcomingLaunches = [
-  "Artemis II",
-  "Crew-11",
-  "Europa Clipper",
-  "Starlink Mission",
-];
+export default async function Home() {
 
-export default function Home() {
+  const launches = await getUpcomingLaunches();
+  const launch = launches[0];
+
+  const launchDate = new Date(launch.launchTime);
+  const now = new Date();
+  const diff = launchDate.getTime() - now.getTime();
+
+  const days = Math.max(Math.floor(diff / (1000 * 60 * 60 * 24)), 0);
+  const hours = Math.max(Math.floor((diff / (1000 * 60 * 60)) % 24), 0);
+  const minutes = Math.max(Math.floor((diff / (1000 * 60)) % 60), 0);
+
   return (
     <main className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-black p-8 text-white">
       <section className="mx-auto max-w-6xl">
@@ -34,9 +30,9 @@ export default function Home() {
           <p className="mt-2 text-slate-300">{launch.agency}</p>
 
           <div className="mt-6 grid gap-4 md:grid-cols-3">
-            <CountdownBox label="Days" value={launch.days} />
-            <CountdownBox label="Hours" value={launch.hours} />
-            <CountdownBox label="Minutes" value={launch.minutes} />
+            <CountdownBox label="Days" value={days} />
+            <CountdownBox label="Hours" value={hours} />
+            <CountdownBox label="Minutes" value={minutes} />
           </div>
 
           <div className="mt-6 grid gap-4 md:grid-cols-4">
@@ -59,12 +55,12 @@ export default function Home() {
             <h2 className="text-xl font-semibold">Upcoming Missions</h2>
 
             <ul className="mt-4 space-y-3">
-              {upcomingLaunches.map((mission) => (
+              {launches.slice(0, 4).map((mission) => (
                 <li
-                  key={mission}
+                  key={mission.id}
                   className="rounded-lg border border-slate-700 bg-slate-800 p-3"
                 >
-                  {mission}
+                  {mission.mission}
                 </li>
               ))}
             </ul>
