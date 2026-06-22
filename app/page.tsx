@@ -1,65 +1,113 @@
-import Image from "next/image";
+const launch = {
+  mission: "Artemis II",
+  agency: "NASA",
+  rocket: "Space Launch System",
+  location: "Kennedy Space Center",
+  status: "GO",
+  days: 12,
+  hours: 4,
+  minutes: 33,
+};
+
+const upcomingLaunches = [
+  "Artemis II",
+  "Crew-11",
+  "Europa Clipper",
+  "Starlink Mission",
+];
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <main className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-black p-8 text-white">
+      <section className="mx-auto max-w-6xl">
+        <h1 className="text-5xl font-bold">🚀 MissionBoard</h1>
+        <p className="mt-2 text-slate-300">
+          NASA Launch & Mission Operations Dashboard
+        </p>
+
+        <div className="mt-8 rounded-3xl border border-slate-700 bg-slate-900 p-8 shadow">
+          <p className="text-sm uppercase tracking-widest text-blue-300">
+            Next Launch
           </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
+
+          <h2 className="mt-3 text-4xl font-bold">{launch.mission}</h2>
+          <p className="mt-2 text-slate-300">{launch.agency}</p>
+
+          <div className="mt-6 grid gap-4 md:grid-cols-3">
+            <CountdownBox label="Days" value={launch.days} />
+            <CountdownBox label="Hours" value={launch.hours} />
+            <CountdownBox label="Minutes" value={launch.minutes} />
+          </div>
+
+          <div className="mt-6 grid gap-4 md:grid-cols-4">
+            <InfoCard title="Rocket" value={launch.rocket} />
+            <InfoCard title="Launch Site" value={launch.location} />
+            <InfoCard title="Agency" value={launch.agency} />
+            <InfoCard title="Status" value={launch.status} />
+          </div>
+
           <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="/discussion"
+            className="mt-6 inline-block rounded-xl bg-blue-500 px-5 py-3 font-semibold text-white hover:bg-blue-600"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
+            Join Mission Discussion
           </a>
         </div>
-      </main>
+
+        <div className="mt-8 grid gap-6 md:grid-cols-2">
+          <div className="rounded-2xl border border-slate-700 bg-slate-900 p-6">
+            <h2 className="text-xl font-semibold">Upcoming Missions</h2>
+
+            <ul className="mt-4 space-y-3">
+              {upcomingLaunches.map((mission) => (
+                <li
+                  key={mission}
+                  className="rounded-lg border border-slate-700 bg-slate-800 p-3"
+                >
+                  {mission}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="rounded-2xl border border-slate-700 bg-slate-900 p-6">
+            <h2 className="text-xl font-semibold">Mission Readiness</h2>
+
+            <p className="mt-4 text-5xl font-bold text-green-400">92/100</p>
+
+            <p className="mt-3 text-slate-300">
+              Launch window, ground systems, and vehicle readiness are currently
+              favorable.
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+  );
+}
+
+function CountdownBox({
+  label,
+  value,
+}: {
+  label: string;
+  value: number;
+}) {
+  return (
+    <div className="rounded-2xl bg-slate-800 p-5 text-center">
+      <p className="text-5xl font-bold text-blue-300">{value}</p>
+      <p className="mt-2 text-sm uppercase tracking-widest text-slate-400">
+        {label}
+      </p>
+    </div>
+  );
+}
+
+function InfoCard({ title, value }: { title: string; value: string }) {
+  return (
+    <div className="rounded-xl bg-slate-800 p-4">
+      <p className="text-sm text-slate-400">{title}</p>
+      <p className="mt-2 font-semibold">{value}</p>
     </div>
   );
 }
