@@ -1,4 +1,5 @@
 import LaunchButton from "@/components/LaunchButton";
+import { getApod } from "@/lib/apod";
 import { getUpcomingLaunches } from "@/lib/launches";
 import Link from "next/link";
 
@@ -14,6 +15,8 @@ export default async function Home() {
   const days = Math.max(Math.floor(diff / (1000 * 60 * 60 * 24)), 0);
   const hours = Math.max(Math.floor((diff / (1000 * 60 * 60)) % 24), 0);
   const minutes = Math.max(Math.floor((diff / (1000 * 60)) % 60), 0);
+
+  const apod = await getApod();
 
   return (
     <main className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-black p-8 text-white">
@@ -75,6 +78,37 @@ export default async function Home() {
               favorable.
             </p>
           </div>
+        </div>
+
+        <div className="mt-8 rounded-2xl border border-slate-700 bg-slate-900 p-6">
+          <h2 className="text-xl font-semibold">
+            NASA Astronomy Picture of the Day
+          </h2>
+
+          {apod.mediaType === "image" ? (
+            <img
+              src={apod.url}
+              alt={apod.title}
+              className="mt-4 max-h-96 w-full rounded-xl object-cover"
+            />
+         ) : (
+            <a
+              href={apod.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-4 inline-block text-blue-400 hover:underline"
+            >
+              Watch Today's NASA Video →
+          </a>
+          )}
+
+          <h3 className="mt-4 text-2xl font-bold">
+            {apod.title}
+          </h3>
+
+          <p className="mt-3 text-slate-300">
+            {apod.explanation.slice(0, 300)}...
+          </p>
         </div>
       </section>
     </main>
