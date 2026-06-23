@@ -34,3 +34,15 @@ export type Launch = {
       launchTime: launch.net,
     }));
   }
+
+  export async function getLaunch(id: string) {
+    const response = await fetch(
+      `https://ll.thespacedevs.com/2.3.0/launches/${id}`
+    );
+  
+    if (!response.ok) {
+      throw new Error("Failed to fetch launch");
+    }
+  
+    return response.json();
+  }

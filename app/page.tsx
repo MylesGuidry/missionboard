@@ -57,13 +57,15 @@ export default async function Home() {
             <h2 className="text-xl font-semibold">Upcoming Missions</h2>
 
             <ul className="mt-4 space-y-3">
-              {launches.slice(0, 4).map((mission) => (
-                <li
-                  key={mission.id}
-                  className="rounded-lg border border-slate-700 bg-slate-800 p-3"
-                >
-                  {mission.mission}
-                </li>
+            {launches.slice(0, 4).map((mission) => (
+              <li key={mission.id}>
+                <Link
+                  href={`/mission/${mission.id}`}
+                  className="block rounded-lg border border-slate-700 bg-slate-800 p-3 hover:bg-slate-700"
+              >
+                {mission.mission}
+                </Link>
+            </li>
               ))}
             </ul>
           </div>
