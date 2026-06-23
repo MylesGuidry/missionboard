@@ -1,3 +1,5 @@
+import SpaceButton from "@/components/SpaceButton";
+
 export default function DiscussionPage() {
     return (
       <main className="min-h-screen bg-slate-950 p-8 text-white">
@@ -17,9 +19,9 @@ export default function DiscussionPage() {
               className="h-32 w-full rounded-xl bg-slate-800 p-4 text-white outline-none"
             />
   
-            <button className="mt-4 rounded-xl bg-blue-500 px-5 py-3 font-semibold hover:bg-blue-600">
-              Post Comment
-            </button>
+          <div className="mt-4">
+            <SpaceButton />
+          </div>
           </div>
   
           <div className="mt-6 space-y-4">
