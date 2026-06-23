@@ -1,4 +1,6 @@
+import LaunchButton from "@/components/LaunchButton";
 import { getUpcomingLaunches } from "@/lib/launches";
+import Link from "next/link";
 
 export default async function Home() {
 
@@ -42,12 +44,9 @@ export default async function Home() {
             <InfoCard title="Status" value={launch.status} />
           </div>
 
-          <a
-            href="/discussion"
-            className="mt-6 inline-block rounded-xl bg-blue-500 px-5 py-3 font-semibold text-white hover:bg-blue-600"
-          >
-            Join Mission Discussion
-          </a>
+          <Link href="/discussion" className="mt-6 inline-block">
+            <LaunchButton />
+          </Link>
         </div>
 
         <div className="mt-8 grid gap-6 md:grid-cols-2">
