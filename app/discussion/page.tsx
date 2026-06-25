@@ -1,7 +1,7 @@
 "use client";
 
 import SpaceButton from "@/components/SpaceButton";
-import { supabase } from "@/lib/supabase";
+import { createClient } from "@/lib/supabaseClient";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -14,8 +14,10 @@ type Comment = {
 };
 
 export default function DiscussionPage() {
+  const supabase = createClient();
   const [comments, setComments] = useState<Comment[]>([]);
   const [name, setName] = useState("");
+  const [userEmail, setUserEmail] = useState("");
   const [message, setMessage] = useState("");
   const searchParams = useSearchParams();
   const missionId = searchParams.get("mission") || "general";
@@ -48,8 +50,20 @@ export default function DiscussionPage() {
   }
 
   useEffect(() => {
+    async function loadUser() {
+      const { data } = await supabase.auth.getUser();
+
+      console.log("USER DATA:", data);
+  
+      if (data.user?.email) {
+        setUserEmail(data.user.email);
+        setName(data.user.email);
+      }
+    }
+  
+    loadUser();
     loadComments();
-  }, []);
+  }, [missionId]);
 
   return (
     <main className="min-h-screen bg-slate-950 p-8 text-white">
@@ -64,12 +78,12 @@ export default function DiscussionPage() {
         </p>
 
         <div className="mt-8 rounded-2xl border border-slate-700 bg-slate-900 p-6">
-          <input
-            value={name}
-            onChange={(event) => setName(event.target.value)}
-            placeholder="Your name"
-            className="mb-4 w-full rounded-xl bg-slate-800 p-4 text-white outline-none"
-          />
+        <p className="mb-4 text-sm text-slate-400">
+          Posting as{" "}
+          <span className="font-semibold text-blue-300">
+            {userEmail || "Guest"}
+          </span>
+        </p>
 
           <textarea
             value={message}
