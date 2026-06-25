@@ -1,3 +1,4 @@
+import FavoriteButton from "@/components/FavoriteButton";
 import { getLaunch } from "@/lib/launches";
 
 type Props = {
@@ -18,9 +19,16 @@ type Props = {
             </a>
       
             <div className="mt-8 rounded-3xl border border-slate-700 bg-slate-900 p-8 shadow">
-              <p className="text-sm uppercase tracking-widest text-blue-300">
-                Mission Details
-              </p>
+              <div className="flex items-center justify-between">
+                <p className="text-sm uppercase tracking-widest text-blue-300">
+                  Mission Details
+                </p>
+
+                <FavoriteButton
+                  missionId={launch.id}
+                  missionName={launch.name}
+                />
+              </div>
       
               <h1 className="mt-3 text-4xl font-bold">
                 {launch.name}
@@ -38,12 +46,14 @@ type Props = {
                 <DetailCard title="Launch Time (Local)" value={new Date(launch.net).toLocaleString()} />
               </div>
 
-              <a
-                href={`/discussion?mission=${launch.id}`}
-                className="mt-6 inline-block rounded-xl bg-blue-500 px-5 py-3 font-semibold text-white hover:bg-blue-600"
-              >
-                Discuss This Mission
-              </a>
+              <div className="mt-6">
+                <a
+                  href={`/discussion?mission=${launch.id}`}
+                  className="inline-block rounded-xl bg-blue-500 px-4 py-2 font-semibold text-white hover:bg-blue-600"
+                >
+                  Discuss Mission
+                </a>
+              </div>
 
             </div>
           </section>

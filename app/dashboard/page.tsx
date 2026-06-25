@@ -89,27 +89,27 @@ export default async function Home() {
 
           {apod.mediaType === "image" ? (
             <img
-              src={apod.url}
-              alt={apod.title}
-              className="mt-4 max-h-96 w-full rounded-xl object-cover"
+             src={apod.url}
+             alt={apod.title}
+             className="mt-4 max-h-[450px] w-full rounded-xl object-cover"
             />
-         ) : (
+          ) : (
             <a
-              href={apod.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-4 inline-block text-blue-400 hover:underline"
+             href={apod.url}
+             target="_blank"
+             rel="noopener noreferrer"
+             className="mt-4 block rounded-xl border border-slate-700 bg-slate-800 p-6 text-blue-300 hover:underline"
             >
-              Watch Today's NASA Video →
+             Watch NASA APOD Video →
           </a>
-          )}
+        )}
 
           <h3 className="mt-4 text-2xl font-bold">
             {apod.title}
           </h3>
 
           <p className="mt-3 text-slate-300">
-            {apod.explanation.slice(0, 300)}...
+            {apod.explanation.slice(0, 400)}...
           </p>
         </div>
       </section>
