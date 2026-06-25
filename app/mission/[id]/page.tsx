@@ -37,6 +37,14 @@ type Props = {
                 <DetailCard title="Status" value={launch.status?.name || "Unknown"} />
                 <DetailCard title="Launch Time (Local)" value={new Date(launch.net).toLocaleString()} />
               </div>
+
+              <a
+                href={`/discussion?mission=${launch.id}`}
+                className="mt-6 inline-block rounded-xl bg-blue-500 px-5 py-3 font-semibold text-white hover:bg-blue-600"
+              >
+                Discuss This Mission
+              </a>
+
             </div>
           </section>
         </main>

@@ -2,6 +2,7 @@
 
 import SpaceButton from "@/components/SpaceButton";
 import { supabase } from "@/lib/supabase";
+import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 type Comment = {
@@ -16,12 +17,14 @@ export default function DiscussionPage() {
   const [comments, setComments] = useState<Comment[]>([]);
   const [name, setName] = useState("");
   const [message, setMessage] = useState("");
+  const searchParams = useSearchParams();
+  const missionId = searchParams.get("mission") || "general";
 
   async function loadComments() {
     const { data, error } = await supabase
       .from("comments")
       .select("*")
-      .eq("mission_id", "general")
+      .eq("mission_id", missionId)
       .order("created_at", { ascending: false });
 
     if (!error && data) {
@@ -33,7 +36,7 @@ export default function DiscussionPage() {
     if (!name.trim() || !message.trim()) return;
 
     const { error } = await supabase.from("comments").insert({
-      mission_id: "general",
+      mission_id: missionId,
       name,
       message,
     });
