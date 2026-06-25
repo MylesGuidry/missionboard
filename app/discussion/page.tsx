@@ -54,7 +54,7 @@ export default function DiscussionPage() {
   return (
     <main className="min-h-screen bg-slate-950 p-8 text-white">
       <section className="mx-auto max-w-4xl">
-        <a href="/" className="text-blue-300 hover:underline">
+        <a href="/dashboard" className="text-blue-300 hover:underline">
           ← Back to Dashboard
         </a>
 

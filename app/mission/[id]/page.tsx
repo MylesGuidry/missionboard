@@ -13,7 +13,7 @@ type Props = {
     return (
         <main className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-black p-8 text-white">
           <section className="mx-auto max-w-5xl">
-            <a href="/" className="text-blue-300 hover:underline">
+            <a href="/dashboard" className="text-blue-300 hover:underline">
               ← Back to Dashboard
             </a>
       
