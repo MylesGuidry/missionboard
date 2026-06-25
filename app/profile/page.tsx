@@ -3,12 +3,20 @@
 import { createClient } from "@/lib/supabaseClient";
 import { useEffect, useState } from "react";
 
+type Favorite = {
+    id: string;
+    mission_id: string;
+    mission_name: string;
+    created_at: string;
+  };
+
 export default function ProfilePage() {
   const supabase = createClient();
 
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [savedUsername, setSavedUsername] = useState("");
+  const [favorites, setFavorites] = useState<Favorite[]>([]);
 
   useEffect(() => {
     async function loadProfile() {
@@ -27,6 +35,16 @@ export default function ProfilePage() {
       if (profile) {
         setUsername(profile.username);
         setSavedUsername(profile.username);
+      }
+
+      const { data: favoritesData } = await supabase
+        .from("favorites")
+        .select("*")
+        .eq("user_id", data.user.id)
+        .order("created_at", { ascending: false });
+
+      if (favoritesData) {
+        setFavorites(favoritesData);
       }
     }
 
@@ -82,6 +100,29 @@ export default function ProfilePage() {
           )}
         </div>
       </div>
+
+<div className="mt-8 rounded-3xl border border-slate-700 bg-slate-900 p-6">
+  <h2 className="text-2xl font-bold">Favorite Launches</h2>
+
+  {favorites.length === 0 ? (
+    <p className="mt-4 text-slate-400">
+      You have not favorited any missions yet.
+    </p>
+  ) : (
+    <div className="mt-4 space-y-3">
+      {favorites.map((favorite) => (
+        <a
+          key={favorite.id}
+          href={`/mission/${favorite.mission_id}`}
+          className="block rounded-xl bg-slate-800 p-4 font-semibold hover:bg-slate-700"
+        >
+          {favorite.mission_name}
+        </a>
+      ))}
+    </div>
+  )}
+</div>
+
     </main>
   );
 }
