@@ -57,7 +57,13 @@ export default function DiscussionPage() {
   
       if (data.user?.email) {
         setUserEmail(data.user.email);
-        setName(data.user.email);
+        const { data: profile } = await supabase
+          .from("profiles")
+          .select("username")
+          .eq("id", data.user.id)
+          .single();
+
+        setName(profile?.username || data.user.email);
       }
     }
   
