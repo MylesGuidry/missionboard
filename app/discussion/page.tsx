@@ -18,6 +18,7 @@ export default function DiscussionPage() {
   const [comments, setComments] = useState<Comment[]>([]);
   const [name, setName] = useState("");
   const [userEmail, setUserEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [message, setMessage] = useState("");
   const searchParams = useSearchParams();
   const missionId = searchParams.get("mission") || "general";
@@ -37,8 +38,13 @@ export default function DiscussionPage() {
   async function postComment() {
     if (!name.trim() || !message.trim()) return;
 
+    const { data: userData } = await supabase.auth.getUser();
+
+    if (!userData.user) return;
+
     const { error } = await supabase.from("comments").insert({
       mission_id: missionId,
+      user_id: userData.user.id,
       name,
       message,
     });
@@ -63,7 +69,9 @@ export default function DiscussionPage() {
           .eq("id", data.user.id)
           .single();
 
-        setName(profile?.username || data.user.email);
+          if (profile?.username) {
+            setUsername(profile.username);
+          }
       }
     }
   
@@ -87,7 +95,7 @@ export default function DiscussionPage() {
         <p className="mb-4 text-sm text-slate-400">
           Posting as{" "}
           <span className="font-semibold text-blue-300">
-            {userEmail || "Guest"}
+            {username || userEmail || "Guest"}
           </span>
         </p>
 

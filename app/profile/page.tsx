@@ -10,13 +10,26 @@ type Favorite = {
     created_at: string;
   };
 
+  type Comment = {
+    id: string;
+    mission_id: string;
+    message: string;
+    created_at: string;
+  };
+
 export default function ProfilePage() {
   const supabase = createClient();
+
+  async function logout() {
+    await supabase.auth.signOut();
+    window.location.href = "/login";
+  }
 
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [savedUsername, setSavedUsername] = useState("");
   const [favorites, setFavorites] = useState<Favorite[]>([]);
+  const [comments, setComments] = useState<Comment[]>([]);
 
   useEffect(() => {
     async function loadProfile() {
@@ -46,7 +59,20 @@ export default function ProfilePage() {
       if (favoritesData) {
         setFavorites(favoritesData);
       }
+      
+      const commentName = profile?.username || data.user.email;
+
+      const { data: commentsData } = await supabase
+        .from("comments")
+        .select("*")
+        .eq("name", commentName)
+        .order("created_at", { ascending: false });
+
+        if (commentsData) {
+          setComments(commentsData);
     }
+
+  }
 
     loadProfile();
   }, []);
@@ -72,7 +98,16 @@ export default function ProfilePage() {
          ← Back to Dashboard
         </a>
 
-        <h1 className="text-4xl font-bold">Profile</h1>
+        <div className="flex items-center justify-between">
+  <h1 className="text-4xl font-bold">Profile</h1>
+
+  <button
+    onClick={logout}
+    className="rounded-lg bg-red-600 px-4 py-2 font-semibold text-white hover:bg-red-700"
+  >
+    Logout
+  </button>
+</div>
 
         <div className="mt-8 rounded-3xl border border-slate-700 bg-slate-900 p-6">
           <p className="text-slate-400">Email</p>
@@ -118,6 +153,31 @@ export default function ProfilePage() {
         >
           {favorite.mission_name}
         </a>
+      ))}
+    </div>
+  )}
+</div>
+
+<div className="mt-8 rounded-3xl border border-slate-700 bg-slate-900 p-6">
+  <h2 className="text-2xl font-bold">Recent Comments</h2>
+
+  {comments.length === 0 ? (
+    <p className="mt-4 text-slate-400">
+      No comments yet.
+    </p>
+  ) : (
+    <div className="mt-4 space-y-3">
+      {comments.map((comment) => (
+        <div
+          key={comment.id}
+          className="rounded-xl bg-slate-800 p-4"
+        >
+          <p>{comment.message}</p>
+
+          <p className="mt-2 text-sm text-slate-400">
+            {new Date(comment.created_at).toLocaleString()}
+          </p>
+        </div>
       ))}
     </div>
   )}
