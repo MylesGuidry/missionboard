@@ -71,7 +71,7 @@ export default function DiscussionPage() {
 
           if (profile?.username) {
             setUsername(profile.username);
-          }
+          }1
       }
     }
   

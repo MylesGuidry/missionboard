@@ -136,6 +136,31 @@ export default function ProfilePage() {
         </div>
       </div>
 
+      <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-3">
+
+  <div className="rounded-2xl border border-slate-700 bg-slate-900 p-6 transition hover:-translate-y-1 hover:border-blue-500 hover:shadow-xl hover:shadow-blue-500/10">
+    <p className="text-slate-400 text-sm">Favorite Missions</p>
+    <p className="mt-3 text-5xl font-bold text-blue-400">
+      {favorites.length}
+    </p>
+  </div>
+
+  <div className="rounded-2xl border border-slate-700 bg-slate-900 p-6 transition hover:-translate-y-1 hover:border-blue-500 hover:shadow-xl hover:shadow-blue-500/10">
+    <p className="text-slate-400 text-sm">Comments Posted</p>
+    <p className="mt-2 text-4xl font-bold text-green-400">
+      {comments.length}
+    </p>
+  </div>
+
+  <div className="rounded-2xl border border-slate-700 bg-slate-900 p-6 transition hover:-translate-y-1 hover:border-blue-500 hover:shadow-xl hover:shadow-blue-500/10">
+    <p className="text-slate-400 text-sm">Member Since</p>
+    <p className="mt-2 text-lg font-semibold">
+      {new Date().getFullYear()}
+    </p>
+  </div>
+
+</div>
+
 <div className="mt-8 rounded-3xl border border-slate-700 bg-slate-900 p-6">
   <h2 className="text-2xl font-bold">Favorite Launches</h2>
 
@@ -147,12 +172,23 @@ export default function ProfilePage() {
     <div className="mt-4 space-y-3">
       {favorites.map((favorite) => (
         <a
-          key={favorite.id}
-          href={`/mission/${favorite.mission_id}`}
-          className="block rounded-xl bg-slate-800 p-4 font-semibold hover:bg-slate-700"
-        >
+        key={favorite.id}
+        href={`/mission/${favorite.mission_id}`}
+        className="block rounded-2xl border border-slate-700 bg-slate-800 p-5 transition-all duration-300 hover:-translate-y-1 hover:border-blue-500 hover:bg-slate-700 hover:shadow-xl hover:shadow-blue-500/10"
+      >
+        <p className="text-xl font-bold tracking-tight text-white">
           {favorite.mission_name}
-        </a>
+        </p>
+      
+        <p className="mt-2 text-sm text-slate-400">
+            Saved{" "}
+            {new Date(favorite.created_at).toLocaleDateString()}
+      </p>
+      
+        <p className="mt-4 text-sm font-semibold text-blue-300">
+          View Mission →
+        </p>
+      </a>
       ))}
     </div>
   )}
