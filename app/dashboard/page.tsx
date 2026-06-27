@@ -1,4 +1,5 @@
 import LaunchButton from "@/components/LaunchButton";
+import MissionSearchList from "@/components/MissionSearchList";
 import { getApod } from "@/lib/apod";
 import { getUpcomingLaunches } from "@/lib/launches";
 import Link from "next/link";
@@ -53,22 +54,7 @@ export default async function Home() {
         </div>
 
         <div className="mt-8 grid gap-6 md:grid-cols-2">
-          <div className="rounded-2xl border border-slate-700 bg-slate-900 p-6">
-            <h2 className="text-xl font-semibold">Upcoming Missions</h2>
-
-            <ul className="mt-4 space-y-3">
-            {launches.slice(0, 4).map((mission) => (
-              <li key={mission.id}>
-                <Link
-                  href={`/mission/${mission.id}`}
-                  className="block rounded-lg border border-slate-700 bg-slate-800 p-3 hover:bg-slate-700"
-              >
-                {mission.mission}
-                </Link>
-            </li>
-              ))}
-            </ul>
-          </div>
+        <MissionSearchList launches={launches} />
 
           <div className="rounded-2xl border border-slate-700 bg-slate-900 p-6">
             <h2 className="text-xl font-semibold">Mission Readiness</h2>
