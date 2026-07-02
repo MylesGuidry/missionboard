@@ -1,36 +1,229 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🚀 MissionBoard
 
-## Getting Started
+MissionBoard is a full-stack web application that allows users to explore upcoming space launches, track mission details, participate in mission discussions, and save favorite launches.
 
-First, run the development server:
+Built with **Next.js**, **TypeScript**, **Tailwind CSS**, and **Supabase**, the application integrates live launch data from the SpaceDevs Launch Library API while providing a modern mission control-inspired interface.
+
+---
+
+## ✨ Features
+
+### 🔐 Authentication
+- Secure user registration and login
+- Supabase Authentication
+- Persistent user sessions
+- Custom usernames
+- User profiles
+
+### 🚀 Mission Dashboard
+- Browse upcoming launches
+- Search missions instantly
+- Mission countdowns
+- NASA Astronomy Picture of the Day
+- Mission readiness overview
+- Responsive dashboard layout
+
+### 📄 Mission Details
+- Detailed mission information
+- Live countdown timer
+- Mission description
+- Launch status
+- Rocket information
+- Launch provider
+- Launch site
+- Mission imagery
+- Favorite missions
+
+### 💬 Mission Discussions
+- Community discussion board
+- Create comments
+- View mission conversations
+- Comment history
+
+### 👤 User Profiles
+- Favorite missions
+- Discussion history
+- User statistics
+- Personalized profile page
+
+### 🎨 User Experience
+- Modern dark UI
+- Responsive design
+- Animated astronaut loading screen
+- Empty state components
+- Reusable React components
+- Fast page navigation
+
+---
+
+# 📸 Screenshots
+
+## Login
+
+*(Add screenshot)*
+
+---
+
+## Dashboard
+
+*(Add screenshot)*
+
+---
+
+## Mission Details
+
+*(Add screenshot)*
+
+---
+
+## Discussion Board
+
+*(Add screenshot)*
+
+---
+
+## Profile
+
+*(Add screenshot)*
+
+---
+
+# 🛠 Tech Stack
+
+## Frontend
+
+- Next.js
+- React
+- TypeScript
+- Tailwind CSS
+
+## Backend
+
+- Supabase
+- PostgreSQL
+
+## APIs
+
+- SpaceDevs Launch Library API
+- NASA Astronomy Picture of the Day API
+
+## Deployment
+
+- Vercel
+
+## Tools
+
+- Git
+- GitHub
+- VS Code
+
+---
+
+# 🚀 Installation
+
+Clone the repository
+
+```bash
+git clone https://github.com/Thinktank02/missionboard.git
+```
+
+Move into the project
+
+```bash
+cd missionboard
+```
+
+Install dependencies
+
+```bash
+npm install
+```
+
+Create a `.env.local`
+
+```env
+NEXT_PUBLIC_SUPABASE_URL=YOUR_SUPABASE_URL
+NEXT_PUBLIC_SUPABASE_ANON_KEY=YOUR_SUPABASE_ANON_KEY
+NASA_API_KEY=YOUR_NASA_API_KEY
+```
+
+Start the development server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+http://localhost:3000
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+# 📁 Project Structure
 
-To learn more about Next.js, take a look at the following resources:
+```
+MissionBoard
+│
+├── app
+│   ├── dashboard
+│   ├── discussion
+│   ├── login
+│   ├── mission
+│   ├── profile
+│   ├── loading.tsx
+│   └── layout.tsx
+│
+├── components
+│   ├── FavoriteButton.tsx
+│   ├── LaunchButton.tsx
+│   ├── MissionSearchList.tsx
+│   ├── SpaceLoader.tsx
+│   ├── SpaceLoader.css
+│   └── UserNav.tsx
+│
+├── lib
+│   ├── launches.ts
+│   ├── supabase.ts
+│   └── ...
+│
+├── public
+│
+└── README.md
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+# 🎯 Future Improvements
 
-## Deploy on Vercel
+- Live updating countdown timer
+- Mission notifications
+- Advanced search filters
+- User avatars
+- Launch calendar
+- Mobile optimization
+- Additional NASA integrations
+- Mission analytics dashboard
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+# 💡 Why I Built This
+
+MissionBoard was created as a portfolio project to demonstrate modern full-stack software engineering concepts through a real-world application.
+
+The project showcases:
+
+- Authentication with Supabase
+- Database-driven features
+- External API integration
+- Responsive UI design
+- Reusable React components
+- TypeScript development
+- Modern Next.js App Router architecture
+
+---
+
+# 📄 License
+
+This project is licensed under the MIT License.
