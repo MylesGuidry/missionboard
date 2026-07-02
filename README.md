@@ -60,8 +60,7 @@ Built with **Next.js**, **TypeScript**, **Tailwind CSS**, and **Supabase**, the 
 
 ## Dashboard
 
-*(Add screenshot)*
-
+![Dashboard](screenshots/dashboard.png)
 ---
 
 ## Mission Details
