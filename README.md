@@ -58,6 +58,10 @@ Built with **Next.js**, **TypeScript**, **Tailwind CSS**, and **Supabase**, the 
 
 # 📸 Screenshots
 
+## Dashboard
+
+*(Add screenshot)*
+
 ---
 
 ## Mission Details
