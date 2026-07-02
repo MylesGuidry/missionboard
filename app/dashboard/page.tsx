@@ -28,7 +28,7 @@ export default async function Home() {
         </p>
 
         <div className="mt-8 rounded-3xl border border-slate-700 bg-slate-900 p-8 shadow">
-          <p className="text-sm uppercase tracking-widest text-blue-300">
+          <p className="text-sm uppercase tracking-widest text-blue-300">1=
             Next Launch
           </p>
 
