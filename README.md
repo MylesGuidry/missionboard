@@ -56,31 +56,6 @@ Built with **Next.js**, **TypeScript**, **Tailwind CSS**, and **Supabase**, the 
 
 ---
 
-# 📸 Screenshots
-
-## Dashboard
-
-![Dashboard](screenshots/dashboard.png)
----
-
-## Mission Details
-
-*(Add screenshot)*
-
----
-
-## Discussion Board
-
-*(Add screenshot)*
-
----
-
-## Profile
-
-*(Add screenshot)*
-
----
-
 # 🛠 Tech Stack
 
 ## Frontend
